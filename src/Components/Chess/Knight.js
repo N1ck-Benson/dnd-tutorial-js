@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { ItemTypes } from "../utils/constants";
+import { ItemTypes } from "../../utils/constants";
 
 // The useDrag hook memoizes an object and returns:
 // (A) a props object, with props determined by the collector function in the callback

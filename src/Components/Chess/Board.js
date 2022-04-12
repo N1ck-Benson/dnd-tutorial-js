@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Knight from "./Knight";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -22,7 +22,9 @@ function renderPiece(x, y, [knightX, knightY]) {
   }
 }
 
-export default function Board({ knightPosition, setKnightPosition }) {
+export default function Board() {
+  const [knightPosition, setKnightPosition] = useState([1, 1]);
+
   const squares = [];
   for (let i = 0; i < 64; i++) {
     squares.push(renderSquare(i, knightPosition, setKnightPosition));
@@ -33,7 +35,7 @@ export default function Board({ knightPosition, setKnightPosition }) {
       <div
         style={{
           width: "100%",
-          height: "100%",
+          height: "900px",
           display: "flex",
           flexWrap: "wrap",
         }}

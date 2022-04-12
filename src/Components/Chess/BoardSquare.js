@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import { ItemTypes } from "../utils/constants";
+import { ItemTypes } from "../../utils/constants";
 import Square from "./Square";
 
 // This component is the potential drop target for the draggable "knight" item
