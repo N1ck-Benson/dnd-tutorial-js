@@ -1,17 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "../../utils/constants";
 
 const style = {
   border: "1px dashed gray",
   padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
+  margin: ".5rem",
   backgroundColor: "white",
   cursor: "move",
 };
 
-const Card = ({ id, text, index, moveCard }) => {
+const Card = ({ id, text, index, moveCard, pos }) => {
   const ref = useRef(null);
+
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
     collect(monitor) {
@@ -49,6 +50,9 @@ const Card = ({ id, text, index, moveCard }) => {
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }
+
+      // ADD conditions for dragging L/R, using item's width instead of height
+
       // Time to actually perform the action
       moveCard(dragIndex, hoverIndex);
       // Note: we're mutating the monitor item here!
@@ -58,6 +62,7 @@ const Card = ({ id, text, index, moveCard }) => {
       item.index = hoverIndex;
     },
   });
+
   const [{ isDragging }, drag] = useDrag({
     type: ItemTypes.CARD,
     item: () => {
@@ -67,8 +72,11 @@ const Card = ({ id, text, index, moveCard }) => {
       isDragging: monitor.isDragging(),
     }),
   });
+
   const opacity = isDragging ? 0 : 1;
+
   drag(drop(ref));
+
   return (
     <div ref={ref} style={{ ...style, opacity }} data-handler-id={handlerId}>
       {text}
