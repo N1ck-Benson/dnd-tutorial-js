@@ -8,6 +8,7 @@ import {
 } from "@dnd-kit/core";
 import {
   arrayMove,
+  rectSortingStrategy,
   rectSwappingStrategy,
   SortableContext,
 } from "@dnd-kit/sortable";
@@ -19,12 +20,21 @@ const DndKitFinal = () => {
   const [cards, setCards] = useState(data);
   const [activeId, setActiveId] = useState(null);
 
-  // activeCardIndex
-
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   const handleDragStart = (event) => {
     setActiveId(event.active.id);
+  };
+
+  const handleDragOver = (event) => {
+    // const { active, over } = event;
+    // if (active.id !== over.id) {
+    //   setCards(() => {
+    //     const oldCardIndex = cards.findIndex((card) => card.id === active.id);
+    //     const newCardIndex = cards.findIndex((card) => card.id === over.id);
+    //     return arrayMove(cards, oldCardIndex, newCardIndex);
+    //   });
+    // }
   };
 
   const handleDragEnd = (event) => {
@@ -48,6 +58,7 @@ const DndKitFinal = () => {
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
         <SortableContext items={cards} strategy={rectSwappingStrategy}>

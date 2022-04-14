@@ -1,16 +1,20 @@
 const gridSizes = {
-  SMALL: { gridRowStart: "span 1", gridColumnStart: "span 1", height: "50px" },
-  MEDIUM: { gridRowStart: "span 1", gridColumnStart: "span 2", height: "50px" },
-  LARGE: { gridRowStart: "span 1", gridColumnStart: "span 4", height: "50px" },
+  SMALL: { gridRowStart: "span 1", gridColumnStart: "span 1", height: "100px" },
+  MEDIUM: {
+    gridRowStart: "span 1",
+    gridColumnStart: "span 2",
+    height: "100px",
+  },
+  LARGE: { gridRowStart: "span 1", gridColumnStart: "span 4", height: "100px" },
   LARGER: {
     gridRowStart: "span 2",
     gridColumnStart: "span 2",
-    height: "100px",
+    height: "220px",
   },
   LARGEST: {
     gridRowStart: "span 2",
     gridColumnStart: "span 4",
-    height: "100px",
+    height: "220px",
   },
 };
 

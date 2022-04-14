@@ -6,22 +6,16 @@ const SortableCard = ({ card, activeId }) => {
   const { id, name, size } = card;
 
   const {
-    transform,
-    transition,
     // Default attributes provided by dnd-kit, can be omitted
     attributes,
     // Could instead distinguish setDraggableRef, setDroppableRef:
     // https://docs.dndkit.com/presets/sortable/usesortable#node-ref
     setNodeRef,
-    // Pass listeners to the element that will trigger the sort
+    // Pass listeners to the element which will trigger the sort
     listeners,
-  } = useSortable({
-    id,
-    transition: {
-      // Add css transition attributes here, or omit for defaults
-      duration: 150,
-    },
-  });
+    transform,
+    transition,
+  } = useSortable({ id });
 
   const style = {
     ...size,
@@ -38,7 +32,7 @@ const SortableCard = ({ card, activeId }) => {
       {...attributes}
       {...listeners}
     >
-      hello, I'm {name}
+      {name}
     </div>
   );
 };
