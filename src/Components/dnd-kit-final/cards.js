@@ -1,9 +1,17 @@
 const gridSizes = {
-  SMALL: { gridRowStart: "span 1", gridColumnStart: "span 1" },
-  MEDIUM: { gridRowStart: "span 1", gridColumnStart: "span 2" },
-  LARGE: { gridRowStart: "span 1", gridColumnStart: "span 4" },
-  LARGER: { gridRowStart: "span 2", gridColumnStart: "span 2" },
-  LARGEST: { gridRowStart: "span 2", gridColumnStart: "span 4" },
+  SMALL: { gridRowStart: "span 1", gridColumnStart: "span 1", height: "50px" },
+  MEDIUM: { gridRowStart: "span 1", gridColumnStart: "span 2", height: "50px" },
+  LARGE: { gridRowStart: "span 1", gridColumnStart: "span 4", height: "50px" },
+  LARGER: {
+    gridRowStart: "span 2",
+    gridColumnStart: "span 2",
+    height: "100px",
+  },
+  LARGEST: {
+    gridRowStart: "span 2",
+    gridColumnStart: "span 4",
+    height: "100px",
+  },
 };
 
 export const cards = [
@@ -51,5 +59,10 @@ export const cards = [
     id: 9,
     name: "metric 9",
     size: gridSizes.LARGER,
+  },
+  {
+    id: 10,
+    name: "metric 10",
+    size: gridSizes.LARGEST,
   },
 ];
