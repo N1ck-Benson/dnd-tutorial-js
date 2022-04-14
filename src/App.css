@@ -2,3 +2,21 @@
   text-align: center;
   height: 900px;
 }
+
+.wrapper {
+  padding: 100px 50px;
+  text-align: center;
+}
+
+.cards_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  box-shadow: 0px 1px 3px grey;
+  padding: 20px;
+}
+
+.card_single {
+  box-shadow: 0px 1px 3px darkgrey;
+  border-radius: 5px;
+}
