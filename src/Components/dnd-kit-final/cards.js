@@ -1,9 +1,9 @@
 const gridSizes = {
-  SMALL: { gridRow: "span 1", gridColumn: "span 1" },
-  MEDIUM: { gridRow: "span 1", gridColumn: "span 2" },
-  LARGE: { gridRow: "span 1", gridColumn: "span 4" },
-  LARGER: { gridRow: "span 2", gridColumn: "span 2" },
-  LARGEST: { gridRow: "span 2", gridColumn: "span 4" },
+  SMALL: { gridRowStart: "span 1", gridColumnStart: "span 1" },
+  MEDIUM: { gridRowStart: "span 1", gridColumnStart: "span 2" },
+  LARGE: { gridRowStart: "span 1", gridColumnStart: "span 4" },
+  LARGER: { gridRowStart: "span 2", gridColumnStart: "span 2" },
+  LARGEST: { gridRowStart: "span 2", gridColumnStart: "span 4" },
 };
 
 export const cards = [

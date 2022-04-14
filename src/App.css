@@ -12,6 +12,8 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
+  grid-auto-rows: "100px";
+  grid-auto-flow: "dense";
   box-shadow: 0px 1px 3px grey;
   padding: 20px;
 }
@@ -19,4 +21,6 @@
 .card_single {
   box-shadow: 0px 1px 3px darkgrey;
   border-radius: 5px;
+  transform-origin: 0 0;
+  padding: 5px;
 }
