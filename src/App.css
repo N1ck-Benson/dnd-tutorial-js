@@ -26,4 +26,23 @@
   border-radius: 5px;
   transform-origin: 0 0;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-resizable-handle {
+  background-color: grey;
+  width: 15px;
+  height: 50px;
+  top: 43%;
+  right: 0;
+  position: absolute;
+  border-radius: 3px;
+}
+
+.edit_save_button {
+  margin-bottom: 50px;
+  text-align: center;
+  width: 100%;
 }
