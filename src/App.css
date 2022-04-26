@@ -22,7 +22,7 @@
 }
 
 .card_single {
-  box-shadow: 0px 1px 3px darkgrey;
+  border: 1px solid black;
   border-radius: 5px;
   transform-origin: 0 0;
   padding: 5px;
@@ -31,11 +31,16 @@
   justify-content: center;
 }
 
+.card_single.draggable {
+  border-color: transparent;
+  box-shadow: 0px 1px 3px darkgrey;
+}
+
 .react-resizable-handle {
   background-color: grey;
   width: 15px;
   height: 50px;
-  top: 43%;
+  top: 35%;
   right: 0;
   position: absolute;
   border-radius: 3px;
@@ -45,4 +50,48 @@
   margin-bottom: 50px;
   text-align: center;
   width: 100%;
+}
+
+/* Styles copied from RGL examples repo */
+
+.react-grid-layout {
+  position: relative;
+  transition: height 200ms ease;
+}
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top;
+}
+.react-grid-item img {
+  pointer-events: none;
+  user-select: none;
+}
+.react-grid-item.cssTransforms {
+  transition-property: transform;
+}
+.react-grid-item.resizing {
+  z-index: 1;
+  will-change: width, height;
+}
+
+.react-grid-item.react-draggable-dragging {
+  transition: none;
+  z-index: 3;
+  will-change: transform;
+}
+
+.react-grid-item.dropping {
+  visibility: hidden;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: lightgray;
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
