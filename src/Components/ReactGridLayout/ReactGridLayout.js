@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { injectPlusButtons, printLoggableLayout } from "./utils";
 
 // Can't get an abstracted component to work in the map function...
 // import SingleCard from "./SingleCard";
@@ -13,30 +14,53 @@ const initialLayout = [
   { i: "a", x: 0, y: 0, w: 2, h: 1, static: false, minW: 1, maxW: 4 },
   { i: "b", x: 1, y: 0, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
   { i: "c", x: 2, y: 0, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
-  { i: "d", x: 3, y: 0, w: 2, h: 2, static: false, minW: 1, maxW: 4 },
-  { i: "e", x: 4, y: 0, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
-  { i: "f", x: 5, y: 0, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
+  { i: "d", x: 0, y: 1, w: 2, h: 2, static: false, minW: 1, maxW: 4 },
+  { i: "e", x: 1, y: 1, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
+  { i: "f", x: 2, y: 1, w: 1, h: 1, static: false, minW: 1, maxW: 4 },
 ];
 
 // Get metrics to match against the layouts
 // const getMetrics = () => {};
 
-const getGridLayout = () => {
-  // if(firestoreHasLayout) { return that layout } else
-  return initialLayout;
-};
-
 const ReactGridLayout = () => {
-  const layout = getGridLayout();
-  const editedLayoutRef = useRef(null);
-  const handleLayoutChange = (_layout, layouts) => {
-    editedLayoutRef.current = layouts;
+  const cols = { lg: 5, md: 4, sm: 2, xs: 2, xxs: 2 };
+  const getGridLayout = () => {
+    // if(firestoreHasLayout) { return that layout } else
+    return injectPlusButtons(initialLayout, cols);
+  };
+  const [layout, setLayout] = useState(getGridLayout());
+  const editedLayoutRef = useRef(getGridLayout());
+
+  const handleLayoutChange = (layout) => {
+    const copy = JSON.stringify(layout);
+    editedLayoutRef.current = JSON.parse(copy);
+  };
+
+  const handleBreakpointChange = () => {
+    console.log("breakpoint change");
+    // const layoutWithoutButtons = layout.filter(
+    //   (item) => !item.i.includes("plus")
+    // );
+    // setLayout(layoutWithoutButtons);
   };
 
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEditSave = () => {
     // if(isEditing) { save editedLayoutRef.current to firestore }
+    if (!isEditing) {
+      const layoutWithoutButtons = layout.filter(
+        (item) => !item.i.includes("plus")
+      );
+      setLayout(layoutWithoutButtons);
+    }
+    if (isEditing) {
+      const layoutWithButtons = injectPlusButtons(
+        editedLayoutRef.current,
+        cols
+      );
+      setLayout(layoutWithButtons);
+    }
     setIsEditing(!isEditing);
   };
 
@@ -45,21 +69,28 @@ const ReactGridLayout = () => {
       <button className="edit_save_button" onClick={handleEditSave}>
         <h1>{!isEditing ? "edit" : "save"}</h1>
       </button>
+      <div className="positions">
+        <h5>X-positions (may not work below md breakpoint):&nbsp;</h5>
+        {["a", "b", "c", "d", "e", "f"].map((p, i) => (
+          <p key={i}>
+            {p}:{" "}
+            {editedLayoutRef.current ? editedLayoutRef.current[i].x : "null"}
+            &nbsp;
+          </p>
+        ))}
+      </div>
       <ResponsiveGridLayout
         isDraggable={isEditing}
+        isResizable={isEditing}
         compactType={"horizontal"}
         layouts={{ lg: layout }}
         onLayoutChange={handleLayoutChange}
-        breakpoints={{ lg: 2560, md: 1440, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 5, md: 4, sm: 2, xs: 2, xxs: 2 }}
+        onBreakpointChange={handleBreakpointChange}
+        breakpoints={{ lg: 2560, md: 1024, sm: 768, xs: 480, xxs: 0 }}
+        cols={cols}
         rowHeight={150}
         width={750}
         useCSSTransforms={true}
-        // onDrag
-        // onDragStart
-        // onDragStop
-        // onDrop
-        // onResize
       >
         {layout.map((item) => (
           // RGL cross-references items with layout information using the i property

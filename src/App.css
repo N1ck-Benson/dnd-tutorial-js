@@ -52,6 +52,17 @@
   width: 100%;
 }
 
+.positions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.positions > p,
+.positions > h5 {
+  border-right: 0.5px red solid;
+  padding: 1px 5px;
+}
+
 /* Styles copied from RGL examples repo */
 
 .react-grid-layout {
